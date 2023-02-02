@@ -1,1 +1,23 @@
-<p>home works!</p>
+<!-- <div *ngIf="!imgUrl; else pokeImg">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Insert a pokemon</mat-label>
+      <input autocomplete="off" matInput formControlName="id" />
+    </mat-form-field>
+    <button mat-button type="submit">Ok</button>
+  </form>
+</div>
+
+<ng-template #pokeImg>
+  <img width="96" height="96" [src]="imgUrl" loading="lazy" />
+</ng-template> -->
+<div class="pokemons">
+  <div class="card" *ngFor="let pokemon of pokemons">
+    <img
+      width="96"
+      height="96"
+      [src]="getPokemonImageByUrl(pokemon.url)"
+      loading="lazy"
+    />
+  </div>
+</div>

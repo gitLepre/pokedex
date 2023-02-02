@@ -11,6 +11,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const _MATERIALS = [
   MatButtonModule,
@@ -23,6 +25,8 @@ const _MATERIALS = [
   MatListModule,
   MatRippleModule,
   MatSnackBarModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 @NgModule({
