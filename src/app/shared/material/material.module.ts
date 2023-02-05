@@ -13,6 +13,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const _MATERIALS = [
   MatButtonModule,
@@ -27,6 +28,7 @@ const _MATERIALS = [
   MatSnackBarModule,
   MatFormFieldModule,
   MatInputModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

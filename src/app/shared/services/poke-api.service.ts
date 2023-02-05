@@ -1,9 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import Pokedex from 'pokedex-promise-v2';
-import { Observable, of } from 'rxjs';
-
-//
+import Pokedex, { NamedAPIResourceList } from 'pokedex-promise-v2';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,25 +9,27 @@ import { Observable, of } from 'rxjs';
 export class PokeApiService {
   api: Pokedex = new Pokedex();
 
-  constructor(private http: HttpClient) {
+  private pokemons$: ReplaySubject<NamedAPIResourceList> =
+    new ReplaySubject<NamedAPIResourceList>(1);
+
+  constructor() {
     console.log(
       '%cPackage used:\n https://github.com/PokeAPI/pokedex-promise-v2',
       'color: green; background-color: LightGreen; padding: 8px;'
     );
+
+    this.api.getPokemonsList().then((ps) => {
+      this.pokemons$.next(ps);
+    });
   }
 
-  getPokemonList(page: number = 0) {
-    if (page < 0) return Promise.resolve();
-
-    const interval = {
-      limit: 12,
-      offset: page * 12,
-    };
-    return this.api.getPokemonsList(interval);
+  getPokemons() {
+    return this.pokemons$;
   }
 
-  getPokemon(id: number) {
-    if (id < 0 || id > 1279) return Promise.resolve();
+  getPokemon(id: number | string) {
+    if ((typeof id === 'number' && id < 0) || id > 1279)
+      return Promise.resolve();
 
     return this.api.getPokemonByName(id);
   }

@@ -1,35 +1,123 @@
-<!-- <div *ngIf="!imgUrl; else pokeImg">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>Insert a pokemon</mat-label>
-      <input autocomplete="off" matInput formControlName="id" />
-    </mat-form-field>
-    <button mat-button type="submit">Ok</button>
-  </form>
-</div> -->
+<form [formGroup]="form">
+  <div class="tag-form-field">
+    <!-- <p class="tags-label">Pokemon</p> -->
+    <mat-chip-list #chipList>
+      <ng-container *ngIf="!fetching">
+        <mat-chip *ngIf="pokemonSearched" (removed)="removePokemon()">
+          {{ pokemonSearched.name }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip></ng-container
+      >
+      <div *ngIf="!pokemonSearched">
+        <input
+          matInput
+          autocomplete="off"
+          placeholder="Search by name or ID"
+          #tagInput
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="[9, 13, 188]"
+          (matChipInputTokenEnd)="onAddPokemon($event.value)"
+          [matAutocomplete]="auto"
+          [(ngModel)]="searchText"
+          (ngModelChange)="searchTextUpdate.next($event)"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <button
+          mat-icon-button
+          [disabled]="fetching || searchText.length === 0"
+          (click)="searchText = ''; searchTextUpdate.next('')"
+        >
+          <mat-icon>{{
+            searchText.length === 0 ? "search" : "close"
+          }}</mat-icon>
+        </button>
+        <p class="tags-hint">Search a Pokèmon by name or National ID</p>
+      </div>
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <ng-container *ngIf="filteredOptions$ | async as options">
+          <mat-option
+            *ngFor="let option of options"
+            [value]="option"
+            (click)="onEnterPokemon($event)"
+            (onSelectionChange)="onEnterPokemon($event)"
+            [disabled]="debouncing"
+          >
+            {{ option }}
+          </mat-option>
+
+          <!-- <mat-option
+              *ngIf="
+                options &&
+                options.length == 0 &&
+                searchTag &&
+                searchTag.length >= 3 &&
+                !isDuplicatedTag(searchTag)
+              "
+              [value]="searchTag"
+              (click)="addTag(searchTag)"
+            >
+              <mat-icon matPrefix>add</mat-icon>
+              <span class="no-options" i18n
+                >Tag non trovato, clicca qui per
+                aggiungerlo</span
+              >
+            </mat-option> -->
+        </ng-container>
+      </mat-autocomplete>
+    </mat-chip-list>
+  </div>
+</form>
 
 <div class="pokemons">
-  <div
-    matRipple
-    [routerLink]="['pokemon', parsePokemonId(pokemon.url)]"
-    class="card"
-    *ngFor="let pokemon of pokemons"
-  >
-    <ng-container *ngIf="parsePokemonId(pokemon.url) as id">
-      <img
-        #pokemonImage
-        (mouseenter)="pokemonImage.src = getPokemonImageOld(id)"
-        (mouseleave)="pokemonImage.src = getPokemonImage(id)"
-        [src]="getPokemonImage(id)"
-        loading="lazy"
-      />
-      <p class="pk-id">{{ "#" + pad(id) }}</p>
-      <p class="pk-name">{{ pokemon.name }}</p>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="pokemonSearched as p; else pokemonList">
+    <div
+      #pokemonList
+      matRipple
+      [routerLink]="['pokemon', parsePokemonId(p.url)]"
+      class="card"
+    >
+      <ng-container *ngIf="parsePokemonId(p.url) as id">
+        <img
+          #pokemonImage
+          (mouseenter)="pokemonImage.src = getPokemonImageOld(id)"
+          (mouseleave)="pokemonImage.src = getPokemonImage(id)"
+          [src]="getPokemonImage(id)"
+          loading="lazy"
+        />
+        <p class="pk-id">{{ "#" + pad(id) }}</p>
+        <p class="pk-name">{{ p.name }}</p>
+      </ng-container>
+    </div>
+  </ng-container>
+  <ng-template #pokemonList>
+    <div
+      #pokemonList
+      matRipple
+      [routerLink]="['pokemon', parsePokemonId(pokemon.url)]"
+      class="card"
+      *ngFor="let pokemon of currentPokemons"
+    >
+      <ng-container *ngIf="parsePokemonId(pokemon.url) as id">
+        <img
+          #pokemonImage
+          (mouseenter)="pokemonImage.src = getPokemonImageOld(id)"
+          (mouseleave)="pokemonImage.src = getPokemonImage(id)"
+          [src]="getPokemonImage(id)"
+          loading="lazy"
+        />
+        <p class="pk-id">{{ "#" + pad(id) }}</p>
+        <p class="pk-name">{{ pokemon.name }}</p>
+      </ng-container>
+    </div>
+  </ng-template>
 </div>
 <button
+  *ngIf="!pokemonSearched"
   [disabled]="fetching"
+  [class.spinner]="fetching"
   mat-stroked-button
   color="primary"
   (click)="loadMore()"

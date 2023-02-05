@@ -4,7 +4,6 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 32px;
   overflow-x: hidden;
@@ -33,6 +32,7 @@
     box-sizing: border-box;
 
     width: 100%;
+    height: 260px;
     max-width: 202px;
     display: flex;
     flex-direction: column;
@@ -69,4 +69,54 @@
       opacity: 0.6;
     }
   }
+}
+
+.tag-form-field {
+  // border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px 16px 12px 16px;
+  position: relative;
+  min-width: 280px;
+  height: 100px;
+  mat-chip-list {
+    div {
+      min-width: 280px;
+      position: relative;
+      button {
+        position: absolute;
+        right: 4px;
+        top: 13px;
+        min-width: 0 !important;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        mat-icon {
+          --size: 15px;
+          width: var(--size);
+          height: var(--size);
+          font-size: var(--size);
+          line-height: var(--size);
+          // color: #cacaca;
+        }
+      }
+
+      input {
+        padding: 12px 32px 12px 16px;
+        outline: none;
+        border: 0.4px solid #dddddd;
+        border-radius: 6px;
+        background: #f2f2f2;
+        width: 100%;
+      }
+    }
+  }
+}
+
+p.tags-label,
+p.tags-hint {
+  font-size: 11px;
+  line-height: 18px;
+  margin: 0 0 0 6px;
+  font-weight: 400;
+  opacity: 0.7;
 }
