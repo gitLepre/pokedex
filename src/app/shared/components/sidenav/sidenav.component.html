@@ -11,9 +11,15 @@
         </div>
       </div>
       <mat-nav-list class="nav-list">
-        <a mat-list-item (click)="drawer.close()" id="route-to-focus-">
+        <a
+          mat-list-item
+          (click)="drawer.close()"
+          [routerLink]="['/']"
+          routerLinkActive="active-link"
+          id="route-to-focus-"
+        >
           <mat-icon>home_round</mat-icon>
-          Home</a
+          Pokèdex</a
         >
       </mat-nav-list>
       <div class="flex-1"></div>
@@ -24,7 +30,15 @@
       </a> -->
 
       <div class="wrap">
-        <!-- <div class="flex-1 hide-mobile"></div> -->
+        <div class="fr gap-1">
+          <img
+            *ngFor="let social of Social | keyvalue"
+            [src]="'assets/img/svg/' + social.value + '.svg'"
+            [alt]="social.value + ' logo'"
+            (click)="openSocial(Social[social.value])"
+            [matTooltip]="social.value"
+          />
+        </div>
         <p
           style="font-size: 0.62rem; text-align: center; margin-bottom: 8px"
           class="light"
@@ -36,16 +50,19 @@
     </div>
   </mat-drawer>
 
-  <div>
-    <a matRipple [href]="'mailto:' + mail" class="sidenav-btn left">
+  <!-- <a matRipple [href]="'mailto:' + mail" class="sidenav-btn left">
       <span>Contact me</span>
       <mat-icon>forward_to_inbox_round</mat-icon>
-    </a>
+    </a> -->
 
-    <a matRipple class="sidenav-btn right" (click)="drawer.toggle()">
-      <mat-icon>menu_round</mat-icon>
-    </a>
-    <router-outlet></router-outlet>
-    <my-footer></my-footer>
+  <div class="topbar">
+    <a [routerLink]="[]">Pokèdex</a>
+    <a [routerLink]="[]">More</a>
   </div>
+
+  <a matRipple class="sidenav-btn right" (click)="drawer.toggle()">
+    <mat-icon>menu_round</mat-icon>
+  </a>
+  <router-outlet></router-outlet>
+  <my-footer></my-footer>
 </mat-drawer-container>

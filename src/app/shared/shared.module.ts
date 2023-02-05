@@ -9,6 +9,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const _SHARED = [
   CommonModule,
@@ -16,6 +17,7 @@ const _SHARED = [
   MaterialModule,
   ReactiveFormsModule,
   RouterModule,
+  MatTooltipModule,
 ];
 const _COMPONENTS = [FooterComponent, SidenavComponent, TopbarComponent];
 

@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`,
+  template: `<my-sidenav></my-sidenav>`,
   styles: [],
 })
 export class AppComponent {

@@ -140,17 +140,17 @@ export class HomeComponent implements OnInit {
     return this.poke.getPokemonImgUrlOld(pokemon);
   }
 
-  onSubmit(id?: string): void {
-    let inputId = id ? id : this.searchText || '';
+  // onSubmit(id?: string): void {
+  //   let inputId = id ? id : this.searchText || '';
 
-    const p = this.pokemons.find(
-      (p) => p.name === inputId || this.parsePokemonId(p.url) === inputId
-    );
-    if (p) {
-      this.pokemonSearched = p;
-      console.log(p);
-    }
-  }
+  //   const p = this.pokemons.find(
+  //     (p) => p.name === inputId || this.parsePokemonId(p.url) === inputId
+  //   );
+  //   if (p) {
+  //     this.pokemonSearched = p;
+  //     console.log(p);
+  //   }
+  // }
 
   pad(num: string, size: number = 4) {
     while (num.length < size) num = '0' + num;

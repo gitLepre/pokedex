@@ -16,7 +16,7 @@ $app-theme: mat-light-theme(
 @include angular-material-theme($app-theme);
 
 // @import "./common-scss/animations.scss";
-// @import "./common-scss/core.scss";
+@import "./common-scss/core.scss";
 @import "./common-scss/typography.scss";
 @import "./common-scss/variables.scss";
 

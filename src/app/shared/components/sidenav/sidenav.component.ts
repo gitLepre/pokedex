@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { MatDrawer, MatDrawerToggleResult } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { Social, SOCIAL_URLS } from '../../models/social.model';
 
 @Component({
   selector: 'my-sidenav',
@@ -15,7 +16,13 @@ import { Router } from '@angular/router';
 })
 export class SidenavComponent implements OnInit {
   mail: string = 'io@federicolorrai.it';
+  Social = Social;
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  openSocial(s: Social) {
+    const url = SOCIAL_URLS[s];
+    if (url) window.open(url, '_blank');
+  }
 }
