@@ -6,18 +6,33 @@
     </mat-form-field>
     <button mat-button type="submit">Ok</button>
   </form>
-</div>
+</div> -->
 
-<ng-template #pokeImg>
-  <img width="96" height="96" [src]="imgUrl" loading="lazy" />
-</ng-template> -->
 <div class="pokemons">
-  <div class="card" *ngFor="let pokemon of pokemons">
-    <img
-      width="96"
-      height="96"
-      [src]="getPokemonImageByUrl(pokemon.url)"
-      loading="lazy"
-    />
+  <div
+    matRipple
+    [routerLink]="['pokemon', parsePokemonId(pokemon.url)]"
+    class="card"
+    *ngFor="let pokemon of pokemons"
+  >
+    <ng-container *ngIf="parsePokemonId(pokemon.url) as id">
+      <img
+        #pokemonImage
+        (mouseenter)="pokemonImage.src = getPokemonImageOld(id)"
+        (mouseleave)="pokemonImage.src = getPokemonImage(id)"
+        [src]="getPokemonImage(id)"
+        loading="lazy"
+      />
+      <p class="pk-id">{{ "#" + pad(id) }}</p>
+      <p class="pk-name">{{ pokemon.name }}</p>
+    </ng-container>
   </div>
 </div>
+<button
+  [disabled]="fetching"
+  mat-stroked-button
+  color="primary"
+  (click)="loadMore()"
+>
+  Load More!
+</button>

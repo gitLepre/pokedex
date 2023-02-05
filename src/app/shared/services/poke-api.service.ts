@@ -18,17 +18,34 @@ export class PokeApiService {
     );
   }
 
-  getPokemonList(page: number = 0): Observable<any> {
-    if (page < 0) return of(null);
+  getPokemonList(page: number = 0) {
+    if (page < 0) return Promise.resolve();
 
-    const url = 'https://pokeapi.co/api/v2/pokemon';
-    let params = new HttpParams();
-    params = params.append('limit', 12);
-    params = params.append('offset', page * 12);
-    return this.http.get<any>(url, { params: params });
+    const interval = {
+      limit: 12,
+      offset: page * 12,
+    };
+    return this.api.getPokemonsList(interval);
+  }
+
+  getPokemon(id: number) {
+    if (id < 0 || id > 1279) return Promise.resolve();
+
+    return this.api.getPokemonByName(id);
   }
 
   getPokemonImgUrl(pokemonIndex: string) {
+    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${this.pad(
+      pokemonIndex
+    )}.png`;
+  }
+
+  getPokemonImgUrlOld(pokemonIndex: string) {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonIndex}.png`;
+  }
+
+  pad(num: string, size: number = 3) {
+    while (num.length < size) num = '0' + num;
+    return num;
   }
 }

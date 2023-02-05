@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   fetching: boolean = true;
 
   pokemons: any[] = [];
+  nextPage: number = 1;
+
   constructor(
     private cdRef: ChangeDetectorRef,
     fb: FormBuilder,
@@ -32,15 +34,46 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.pokemons = (
-      await firstValueFrom(this.getPokemonList().pipe(delay(600)))
-    ).results;
-    this.fetching = false;
-    this.cdRef.markForCheck();
-    console.log(this.pokemons);
+    this.getPokemonList().then(
+      (res) => {
+        if (res) {
+          this.pokemons = res.results;
+          console.log(res.results);
+        }
+        this.fetching = false;
+        this.cdRef.markForCheck();
+      },
+      (res) => {
+        console.error(res);
+        this.fetching = false;
+        this.cdRef.markForCheck();
+      }
+    );
   }
 
-  parsePokemonId(url: string = 'https://pokeapi.co/api/v2/pokemon/12/') {
+  async loadMore() {
+    try {
+      this.fetching = true;
+      this.cdRef.markForCheck();
+      this.getPokemonList(this.nextPage++).then(
+        (res) => {
+          if (res) this.pokemons.push(...res.results);
+          this.fetching = false;
+          this.cdRef.markForCheck();
+        },
+        (res) => {
+          console.error(res);
+          this.fetching = false;
+          this.cdRef.markForCheck();
+        }
+      );
+    } catch (e: any) {
+      console.error(e);
+    }
+    this.cdRef.markForCheck();
+  }
+
+  parsePokemonId(url: string) {
     const splits = url.split('/');
     const l = splits.length;
     console.log();
@@ -55,10 +88,14 @@ export class HomeComponent implements OnInit {
     return this.poke.getPokemonImgUrl(pokemon);
   }
 
-  getPokemonImageByUrl(url: string) {
-    const id = this.parsePokemonId(url);
-    return this.poke.getPokemonImgUrl(id);
+  getPokemonImageOld(pokemon: string) {
+    return this.poke.getPokemonImgUrlOld(pokemon);
   }
+
+  // getPokemonImageByUrl(url: string) {
+  //   const id = this.parsePokemonId(url);
+  //   return this.poke.getPokemonImgUrl(id);
+  // }
 
   // onSubmit(): void {
   //   const f = Object.assign({}, this.form.getRawValue());
@@ -66,4 +103,9 @@ export class HomeComponent implements OnInit {
   //     if (p && p.id) this.imgUrl = this.poke.getPokemonImgUrl(p.id);
   //   });
   // }
+
+  pad(num: string, size: number = 4) {
+    while (num.length < size) num = '0' + num;
+    return num;
+  }
 }
