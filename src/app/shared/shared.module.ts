@@ -10,6 +10,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const _SHARED = [
   CommonModule,
@@ -22,7 +23,7 @@ const _SHARED = [
 const _COMPONENTS = [FooterComponent, SidenavComponent, TopbarComponent];
 
 @NgModule({
-  declarations: [_COMPONENTS],
+  declarations: [_COMPONENTS, NotFoundComponent],
   imports: [_SHARED],
   exports: [_SHARED, _COMPONENTS],
 })

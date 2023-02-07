@@ -17,19 +17,29 @@ export class PokemonDetailsComponent implements OnInit {
   fetching = true;
   id: string;
   pokemon: any;
+  err: boolean = false;
+
   constructor(
     private cdRef: ChangeDetectorRef,
     private poke: PokeApiService,
     private activatedRoute: ActivatedRoute
   ) {
     this.id = activatedRoute.snapshot.params['id'];
-    this.poke.getPokemon(+this.id).then((res) => {
-      this.pokemon = res;
-      this.fetching = false;
-      console.log(res);
-      this.cdRef.markForCheck();
-      this.getGameIndex();
-    });
+    this.poke
+      .getPokemon(+this.id)
+      .then((res) => {
+        this.pokemon = res;
+        this.fetching = false;
+        console.log(res);
+        this.cdRef.markForCheck();
+        this.getGameIndex();
+      })
+      .catch((e) => {
+        console.error(e);
+        this.err = true;
+        this.fetching = false;
+        this.cdRef.markForCheck();
+      });
   }
 
   getPokemonImage(pokemon: string) {

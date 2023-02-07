@@ -56,8 +56,8 @@
     </a> -->
 
   <div class="topbar">
-    <a [routerLink]="[]">Pokèdex</a>
-    <a [routerLink]="[]">More</a>
+    <a [routerLink]="['pokedex']">Pokèdex</a>
+    <a class="disabled-link" [routerLink]="[]">More Coming</a>
   </div>
 
   <a matRipple class="sidenav-btn right" (click)="drawer.toggle()">
