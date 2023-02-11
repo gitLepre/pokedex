@@ -76,7 +76,7 @@
     <div
       #pokemonList
       matRipple
-      [routerLink]="['pokemon', parsePokemonId(p.url)]"
+      [routerLink]="[parsePokemonId(p.url)]"
       class="card"
     >
       <ng-container *ngIf="parsePokemonId(p.url) as id">
@@ -96,7 +96,7 @@
     <div
       #pokemonList
       matRipple
-      [routerLink]="['pokemon', parsePokemonId(pokemon.url)]"
+      [routerLink]="[parsePokemonId(pokemon.url)]"
       class="card"
       *ngFor="let pokemon of currentPokemons"
     >
