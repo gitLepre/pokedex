@@ -5,7 +5,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { PokeApiService } from 'src/app/shared/services/poke-api.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import {
   BehaviorSubject,
   debounceTime,
@@ -26,7 +26,7 @@ import { SnackService } from 'src/app/shared/services/snack.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   fetching: boolean = true;
   debouncing: boolean = false;
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     private poke: PokeApiService,
     private snack: SnackService
   ) {
