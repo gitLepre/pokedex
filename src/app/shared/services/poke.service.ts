@@ -19,9 +19,13 @@ export class PokeApiService {
     return this.pokemons.find((pokemon) => pokemon.pokedex_number === id);
   }
 
-  getPokemonImgUrl(pokemonIndex: string) {
+  getPokemonImgUrlFromAssets(pokemonIndex: string | number) {
+    return `assets/images/pokemons/${this.pad('' + pokemonIndex)}.png`;
+  }
+
+  getPokemonImgUrl(pokemonIndex: string | number) {
     return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${this.pad(
-      pokemonIndex
+      '' + pokemonIndex
     )}.png`;
   }
 
