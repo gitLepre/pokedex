@@ -1,12 +1,19 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withPreloading,
+} from '@angular/router';
+import { AppComponent } from './app/app.component';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { APP_ROUTES } from './app/routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-if (environment.production) {
-  enableProdMode();
-}
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(BrowserAnimationsModule, MatSnackBarModule),
+    provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
+  ],
+}).catch((err) => console.error(err));

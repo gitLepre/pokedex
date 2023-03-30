@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterOutlet } from '@angular/router';
+import { debounceTime, fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  template: `<my-sidenav></my-sidenav>`,
+  template: `<router-outlet></router-outlet>`,
   styles: [],
+  standalone: true,
+  imports: [RouterOutlet],
 })
 export class AppComponent {
-  title = 'Lepre';
+  title = 'Pokèdex';
 
   constructor(title: Title) {
-    title.setTitle('Pokedex');
+    title.setTitle('Federico Lorrai');
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }

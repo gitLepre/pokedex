@@ -1,0 +1,45 @@
+<div class="fr gap-1">
+  <mat-form-field appearance="outline" class="tag-form-field">
+    <input
+      matInput
+      autocomplete="off"
+      placeholder="Search by name or ID"
+      #tagInput
+      [matAutocomplete]="auto"
+      [(ngModel)]="searchText"
+      (ngModelChange)="searchTextUpdate.next($event)"
+      [ngModelOptions]="{ standalone: true }"
+    />
+
+    <button
+      mat-icon-button
+      [disabled]="searchText.length === 0"
+      (click)="searchText = ''; searchTextUpdate.next('')"
+    >
+      <mat-icon>{{ searchText.length === 0 ? "search" : "close" }}</mat-icon>
+    </button>
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <ng-container *ngIf="filteredOptions$ | async as options">
+        <mat-option
+          *ngFor="let option of options"
+          [value]="option"
+          (click)="searchText = option; searchTextUpdate.next(option)"
+          (onSelectionChange)="onSelectPokemon($event)"
+          [disabled]="debouncing"
+        >
+          {{ option }}
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button
+    style="height: 41px"
+    mat-stroked-button
+    (click)="onOpenFiltersDialog()"
+  >
+    <span>Filters</span>
+    <mat-icon>filter_list</mat-icon>
+  </button>
+</div>

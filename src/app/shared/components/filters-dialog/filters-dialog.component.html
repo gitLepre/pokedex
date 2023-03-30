@@ -1,0 +1,33 @@
+<div mat-dialog-title>Filters</div>
+
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <!-- <mat-form-field>
+        <mat-label>Generation</mat-label>
+        <mat-select formControlName="generations">
+        <mat-option *ngFor="let generation of generations" [value]="generation">
+            {{ generation }}
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
+     -->
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-select
+        #typesSelect
+        multiple
+        placeholder="All Types"
+        formControlName="types"
+      >
+        <mat-option *ngFor="let type of types" [value]="type">
+          <span class="capitalize">{{ type }}</span>
+        </mat-option>
+      </mat-select>
+      <mat-hint> Filtering by {{ typesSelect.value.length }} types </mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+  <button mat-button (click)="save()">Apply</button>
+</div>

@@ -1,0 +1,8 @@
+:host {
+  ::ng-deep .mat-mdc-select-value-text {
+    text-transform: capitalize;
+  }
+}
+.capitalize {
+  text-transform: capitalize;
+}
