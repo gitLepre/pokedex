@@ -11,10 +11,10 @@ import { debounceTime, fromEvent, Subscription } from 'rxjs';
   imports: [RouterOutlet],
 })
 export class AppComponent {
-  title = 'Pokèdex';
+  title = "Federico Lorrai's Pokèdex";
 
   constructor(title: Title) {
-    title.setTitle('Federico Lorrai');
+    title.setTitle(this.title);
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }

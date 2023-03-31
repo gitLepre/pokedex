@@ -55,77 +55,69 @@ export class MainInfoComponent {
   addToFavorites() {}
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      const img = this.imgElement.nativeElement;
+    const img = this.imgElement.nativeElement;
 
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
 
-        const context: any = canvas.getContext('2d');
-        context.drawImage(img, 0, 0);
+      const context: any = canvas.getContext('2d');
+      context.drawImage(img, 0, 0);
 
-        const imageData = context.getImageData(
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-        const data = imageData.data;
-        const colors = [];
-        const colorCounts: any = {};
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      const colors = [];
+      const colorCounts: any = {};
 
-        const limitColorValue = 255;
-        for (let i = 0; i < data.length; i += 4) {
-          const r = Math.min(data[i], limitColorValue);
-          const g = Math.min(data[i + 1], limitColorValue);
-          const b = Math.min(data[i + 2], limitColorValue);
-          const color = `rgb(${r}, ${g}, ${b})`;
+      const limitColorValue = 255;
+      for (let i = 0; i < data.length; i += 4) {
+        const r = Math.min(data[i], limitColorValue);
+        const g = Math.min(data[i + 1], limitColorValue);
+        const b = Math.min(data[i + 2], limitColorValue);
+        const color = `rgb(${r}, ${g}, ${b})`;
 
-          if (color === 'rgb(0, 0, 0)' || color === 'rgb(255, 255, 255)') {
-            continue;
-          }
-
-          if (!colorCounts[color]) {
-            colorCounts[color] = 1;
-          } else {
-            colorCounts[color]++;
-          }
+        if (color === 'rgb(0, 0, 0)' || color === 'rgb(255, 255, 255)') {
+          continue;
         }
 
-        let maxCount = 0;
-        let maxColor = '';
-
-        for (const color in colorCounts) {
-          if (colorCounts[color] > maxCount) {
-            maxCount = colorCounts[color];
-            maxColor = color;
-          }
+        if (!colorCounts[color]) {
+          colorCounts[color] = 1;
+        } else {
+          colorCounts[color]++;
         }
+      }
 
-        const [rMax, gMax, bMax] = maxColor.replace(/[^\d,]/g, '').split(',');
-        const threshold = 180;
-        let pkmnDetailsHeaderColor = 'white';
-        // change the root var   --pokemon-details-header-color to black if the background is too bright
-        if (+rMax + +gMax + +bMax > threshold * 3) {
-          pkmnDetailsHeaderColor = 'black';
+      let maxCount = 0;
+      let maxColor = '';
+
+      for (const color in colorCounts) {
+        if (colorCounts[color] > maxCount) {
+          maxCount = colorCounts[color];
+          maxColor = color;
         }
-        document.documentElement.style.setProperty(
-          '--pokemon-details-header-color',
-          pkmnDetailsHeaderColor
-        );
+      }
 
-        const rgba = `rgba(${rMax}, ${gMax}, ${bMax}, 0.75)`;
+      const [rMax, gMax, bMax] = maxColor.replace(/[^\d,]/g, '').split(',');
+      const threshold = 180;
+      let pkmnDetailsHeaderColor = 'white';
+      if (+rMax + +gMax + +bMax > threshold * 3) {
+        pkmnDetailsHeaderColor = 'black';
+      }
+      document.documentElement.style.setProperty(
+        '--pokemon-details-header-color',
+        pkmnDetailsHeaderColor
+      );
 
-        document.body.style.backgroundColor = rgba;
-        document.documentElement.style.setProperty(
-          '--pokemon-details-background-color',
-          rgba
-        );
-      };
+      const rgba = `rgba(${rMax}, ${gMax}, ${bMax}, 0.75)`;
 
-      img.src = this.pokemonImageUrl;
-    }, 300);
+      document.body.style.backgroundColor = rgba;
+      document.documentElement.style.setProperty(
+        '--pokemon-details-background-color',
+        rgba
+      );
+    };
+
+    img.src = this.pokemonImageUrl;
   }
 }

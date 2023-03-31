@@ -18,8 +18,11 @@
     </button>
   </header>
   <div class="sub-header">
-    <h1>{{ pokemon?.name }}</h1>
-    <p class="small light end"># {{ pokemon?.pokedex_number | zeroPad }}</p>
+    <h1>{{ pokemon.name }}</h1>
+    <p class="small light">
+      {{ pokemon.japanese_name }}
+    </p>
+    <p class="big light end"># {{ pokemon.pokedex_number | zeroPad }}</p>
 
     <ng-container *ngIf="pokemon | getTypes as types">
       <mat-chip-listbox>
@@ -30,12 +33,7 @@
     </ng-container>
   </div>
 
-  <img
-    #pokemonImage
-    [alt]="(pokemon?.name || 'Pokemon') + ' image'"
-    class="pokemon-img"
-    draggable="false"
-  />
+  <img #pokemonImage class="pokemon-img" draggable="false" class="fade-in" />
 </ng-container>
 
 <ng-template #loader></ng-template>

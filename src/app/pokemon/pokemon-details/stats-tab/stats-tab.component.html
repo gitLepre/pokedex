@@ -8,21 +8,16 @@
         </tr>
         <tr>
           <td>Height</td>
-          <td>{{ p.height_m }}</td>
+          <td>{{ p | getHeight }} ({{ p | toLbs }})</td>
         </tr>
         <tr>
           <td>Weight</td>
-          <td>{{ p.weight_kg }}</td>
+          <td>{{ p | getWeight }} ({{ p | toFeet }})</td>
         </tr>
         <tr>
           <td>Abilities</td>
           <td>
-            <ng-container *ngIf="p.ability_1">
-              {{ p.ability_1 }}
-            </ng-container>
-            <ng-container *ngIf="p.ability_2">
-              {{ p.ability_2 }}
-            </ng-container>
+            {{ p | getAbilities }}
           </td>
         </tr>
       </table>
