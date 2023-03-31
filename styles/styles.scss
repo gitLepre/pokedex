@@ -25,7 +25,6 @@ $app-theme: mat-light-theme(
 }
 html,
 body {
-  height: 100%;
   box-sizing: border-box;
   // cursor: url("./assets/img/cursor/custom-cursor.png"), auto;
   scroll-behavior: smooth;
@@ -33,6 +32,7 @@ body {
   color: var(--main-text);
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.3s ease-in-out;
 }
 body {
   margin: 0;

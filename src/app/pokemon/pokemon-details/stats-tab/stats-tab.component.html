@@ -1,0 +1,49 @@
+<mat-tab-group class="stats-tab" mat-align-tabs="center">
+  <mat-tab label="About">
+    <ng-container *ngIf="pokemon as p">
+      <table class="about-table">
+        <tr>
+          <td>Species</td>
+          <td>{{ p.species }}</td>
+        </tr>
+        <tr>
+          <td>Height</td>
+          <td>{{ p.height_m }}</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>{{ p.weight_kg }}</td>
+        </tr>
+        <tr>
+          <td>Abilities</td>
+          <td>
+            <ng-container *ngIf="p.ability_1">
+              {{ p.ability_1 }}
+            </ng-container>
+            <ng-container *ngIf="p.ability_2">
+              {{ p.ability_2 }}
+            </ng-container>
+          </td>
+        </tr>
+      </table>
+      <h3 class="mt-2 mb-1">Breeding</h3>
+      <table class="about-table">
+        <tr>
+          <td>Gender</td>
+          <td>{{ p.species }}</td>
+        </tr>
+        <tr>
+          <td>Egg Groups</td>
+          <td>{{ p.species }}</td>
+        </tr>
+        <tr>
+          <td>Egg Cycle</td>
+          <td>{{ p.species }}</td>
+        </tr>
+      </table>
+    </ng-container>
+  </mat-tab>
+  <mat-tab label="Stats">Content 2</mat-tab>
+  <mat-tab label="Evolutions">Content 3</mat-tab>
+  <mat-tab label="Moves">Content 3</mat-tab>
+</mat-tab-group>

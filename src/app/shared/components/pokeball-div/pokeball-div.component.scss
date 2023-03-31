@@ -1,0 +1,43 @@
+:host {
+  border-radius: 50%;
+  --size: 220px;
+  width: var(--size);
+  height: var(--size);
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .pokeball-outer-circle {
+    border-radius: 50%;
+    --size: 100px;
+    width: var(--size);
+    height: var(--size);
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .pokeball-inner-circle {
+      --size: 50px;
+      width: var(--size);
+      height: var(--size);
+      background-color: #eee;
+      border-radius: 50%;
+    }
+  }
+
+  .pokeball-horiz-line {
+    position: absolute;
+    top: calc(50% - 15px);
+    background-color: white;
+    z-index: 1;
+    width: 65px;
+    height: 30px;
+    &.left {
+      left: 0;
+    }
+    &.right {
+      right: 0;
+    }
+  }
+}
