@@ -8,6 +8,9 @@ import { GetPokemonAbilitiesPipe } from 'src/app/shared/pipes/get-abilities.pipe
 import { Pokemon } from 'src/app/shared/models/pokemon.model';
 import { ActivatedRoute } from '@angular/router';
 import { PokeApiService } from 'src/app/shared/services/poke.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { GetEggGroupsPipe } from 'src/app/shared/pipes/get-eggs.pipe copy';
 
 @Component({
   standalone: true,
@@ -22,6 +25,9 @@ import { PokeApiService } from 'src/app/shared/services/poke.service';
     ConvertToFeetPipe,
     ConvertToLbsPipe,
     GetPokemonAbilitiesPipe,
+    MatTooltipModule,
+    MatIconModule,
+    GetEggGroupsPipe,
   ],
 })
 export class AboutComponent {

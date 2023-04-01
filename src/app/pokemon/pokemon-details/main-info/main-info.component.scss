@@ -5,14 +5,14 @@
 :host {
   position: relative;
   min-height: 350px;
-  padding: 0 40px;
+  padding: 0 32px;
 
   header {
     position: relative;
-    min-height: 80px;
+    min-height: 70px;
     button {
       position: absolute;
-      top: 18px;
+      top: 16px;
       mat-icon {
         color: var(--pokemon-details-header-color);
 

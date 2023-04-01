@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { Pokemon } from '../../../shared/models/pokemon.model';
-import { GetPokemonTypesPipe } from '../../../shared/pipes/get-pokemon-types.pipe';
+import { GetPokemonTypesPipe } from '../../../shared/pipes/get-types.pipe';
 import { ZeroPadPipe } from 'src/app/shared/pipes/zero-pad.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PokeApiService } from '../../../shared/services/poke.service';

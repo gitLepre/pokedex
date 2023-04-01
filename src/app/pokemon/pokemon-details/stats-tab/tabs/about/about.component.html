@@ -18,6 +18,12 @@
         {{ p | getAbilities }}
       </td>
     </tr>
+    <tr>
+      <td>Generation</td>
+      <td>
+        {{ p?.generation || "N/A" }}
+      </td>
+    </tr>
   </table>
   <h3 class="mt-2 mb-1">Breeding</h3>
   <table class="about-table">
@@ -27,11 +33,32 @@
     </tr>
     <tr>
       <td>Egg Groups</td>
-      <td>{{ p.species }}</td>
+      <td>{{ p | getEggGroups }}</td>
     </tr>
     <tr>
-      <td>Egg Cycle</td>
-      <td>{{ p.species }}</td>
+      <td class="help-wrap">
+        Egg Cycles
+        <mat-icon
+          class="help"
+          matTooltipClass="help-tooltip"
+          matTooltipShowDelay="200"
+          matTooltipHideDelay="150"
+          #tooltip="matTooltip"
+          (click)="tooltip.toggle()"
+          matTooltip="An Egg cycle (Japanese: タマゴのサイクル Egg
+          cycle) is an internal value used for tracking how long until a Pokémon
+          Egg hatches in the core series Pokémon games. An Egg's Egg cycle
+          counter is initially set to a specific value that depends on the
+          Pokémon species about to hatch. When an Egg is in the party, taking a
+          particular number of steps decreases its remaining number of Egg
+          cycles by 1. When the player takes a number of steps equal to an Egg
+          cycle, their Egg's remaining Egg cycles normally decrease by 1. Once
+          an Egg has no Egg cycles remaining, it hatches. The specifics of how
+          this is implemented differs between generations. "
+          >help</mat-icon
+        >
+      </td>
+      <td>{{ p.egg_cycles }}</td>
     </tr>
   </table>
 </ng-container>

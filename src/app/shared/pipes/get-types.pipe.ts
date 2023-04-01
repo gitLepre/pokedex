@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Pokemon } from '../models/pokemon.model';
-import { of } from 'rxjs';
 
 @Pipe({
   name: 'getTypes',
