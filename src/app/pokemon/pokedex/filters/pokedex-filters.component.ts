@@ -31,7 +31,7 @@ const _MATERIAL = [
 @Component({
   selector: 'pokedex-filters',
   templateUrl: './pokedex-filters.component.html',
-  styles: [],
+  styleUrls: ['./pokedex-filters.component.scss'],
   imports: [..._MATERIAL, MatFormFieldModule, FormsModule, CommonModule],
   standalone: true,
 })

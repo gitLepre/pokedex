@@ -1,16 +1,5 @@
 <pokedex-filters></pokedex-filters>
 
-<button
-  mat-button
-  [routerLink]="['/pokemon', '1']"
-  routerLinkActive="router-link-active"
->
-  1
-</button>
-<button
-  mat-button
-  [routerLink]="['/pokemon', '493']"
-  routerLinkActive="router-link-active"
->
-  493
-</button>
+<div *ngFor="let p of pokemons | slice : 0 : 4">
+  <pokemon-card [pokemon]="p"></pokemon-card>
+</div>

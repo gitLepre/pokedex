@@ -1,0 +1,6 @@
+<ng-container *ngIf="pokemon">
+  <div class="card" [routerLink]="['/pokemon', pokemon.pokedex_number]">
+    <h2>{{ pokemon.name }}</h2>
+    <img [src]="getPokemonImage()" [alt]="pokemon.name" />
+  </div>
+</ng-container>
