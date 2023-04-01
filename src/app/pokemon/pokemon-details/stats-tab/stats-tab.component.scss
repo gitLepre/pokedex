@@ -5,21 +5,9 @@
   border-top-right-radius: 16px;
   height: 100%;
   padding-top: 40px;
-
-  h3 {
-    margin-left: 2px;
-  }
-
-  .about-table {
-    tr {
-      height: 30px;
-    }
-    tr :first-child {
-      font-weight: thin;
-      color: #b9b9b9;
-      width: 90px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   ::ng-deep {
     .mdc-tab {
@@ -35,17 +23,28 @@
       padding: 0 16px 20px 16px;
     }
 
+    .mat-mdc-tab-group {
+      height: 100%;
+      flex: 1;
+    }
+
     .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
       > .mat-mdc-tab-header
       .mat-mdc-tab {
       flex-grow: 1;
-      flex-grow: 0;
-      min-width: 0;
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .mat-mdc-tab-body-wrapper {
-      padding: 0 40px 32px 40px;
+      height: 100%;
+      flex: 1;
+      // overflow: hidden;
+
+      mat-tab-body > * {
+        padding: 0 40px 32px 40px;
+      }
     }
   }
 }

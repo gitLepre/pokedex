@@ -26,6 +26,7 @@ $app-theme: mat-light-theme(
 html,
 body {
   box-sizing: border-box;
+  height: 100%;
   // cursor: url("./assets/img/cursor/custom-cursor.png"), auto;
   scroll-behavior: smooth;
   background-color: var(--background-color);
@@ -68,24 +69,26 @@ body {
   max-width: 960px;
 }
 
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
-* {
-  scrollbar-width: auto;
-  scrollbar-color: var(--accent-text) var(--background-color);
-}
+@media (min-width: 768px) {
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: var(--accent-text) var(--background-color);
+  }
 
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 16px;
-}
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
 
-*::-webkit-scrollbar-track {
-  background: var(--background-color);
-}
+  *::-webkit-scrollbar-track {
+    background: var(--background-color);
+  }
 
-*::-webkit-scrollbar-thumb {
-  background-color: var(--accent-text);
-  border-radius: 6px;
-  border: 4px solid var(--background-color);
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--accent-text);
+    border-radius: 6px;
+    border: 4px solid var(--background-color);
+  }
 }

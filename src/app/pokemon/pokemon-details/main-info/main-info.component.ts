@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PokeApiService } from '../../../shared/services/poke.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { GetTypeIconPipe } from 'src/app/shared/pipes/get-type-icon.pipe';
 
 @Component({
   standalone: true,
@@ -20,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
     NgFor,
     GetPokemonTypesPipe,
     ZeroPadPipe,
+    GetTypeIconPipe,
     MatButtonModule,
     MatIconModule,
   ],

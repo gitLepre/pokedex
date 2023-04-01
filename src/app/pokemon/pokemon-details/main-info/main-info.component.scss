@@ -31,24 +31,6 @@
     }
   }
 
-  ::ng-deep {
-    .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
-      background-color: rgba(255, 255, 255, 0.4);
-    }
-    .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
-      .mdc-evolution-chip__text-label {
-      color: var(--pokemon-details-header-color);
-      font-weight: 600;
-    }
-
-    .mat-mdc-standard-chip {
-      height: 24px;
-    }
-    .mat-mdc-chip-set .mdc-evolution-chip-set__chips {
-      gap: 6px;
-    }
-  }
-
   .sub-header {
     display: flex;
     flex-direction: column;
@@ -65,6 +47,36 @@
     }
   }
 
+  img.pokemon-img {
+    position: absolute;
+    bottom: -60px;
+    left: calc(50% - 105px);
+  }
+
+  ::ng-deep {
+    .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+    .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
+      .mdc-evolution-chip__text-label {
+      color: var(--pokemon-details-header-color);
+      font-weight: 600;
+    }
+
+    .mat-mdc-standard-chip {
+      height: 28px;
+    }
+    .mat-mdc-chip-set .mdc-evolution-chip-set__chips {
+      gap: 6px;
+    }
+
+    .mat-mdc-chip-action-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+
   .fade-in {
     animation: fadeIn 0.3s ease-in-out;
   }
@@ -76,11 +88,5 @@
     100% {
       opacity: 1;
     }
-  }
-
-  img {
-    position: absolute;
-    bottom: -60px;
-    left: calc(50% - 105px);
   }
 }

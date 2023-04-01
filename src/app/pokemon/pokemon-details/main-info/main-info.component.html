@@ -27,13 +27,20 @@
     <ng-container *ngIf="pokemon | getTypes as types">
       <mat-chip-listbox>
         <mat-chip *ngFor="let type of types">
+          <img width="14" [src]="type | getTypeIcon" />
           {{ type }}
         </mat-chip>
       </mat-chip-listbox>
+      <!-- <mat-chip-listbox>
+        <mat-chip *ngFor="let type of types">
+          <img width="16" [src]="type | getTypeIcon" />
+          <span matChipTrailingIcon>{{ type }}</span>
+        </mat-chip>
+      </mat-chip-listbox> -->
     </ng-container>
   </div>
 
-  <img #pokemonImage class="pokemon-img" draggable="false" class="fade-in" />
+  <img #pokemonImage class="pokemon-img fade-in" draggable="false" />
 </ng-container>
 
 <ng-template #loader></ng-template>
