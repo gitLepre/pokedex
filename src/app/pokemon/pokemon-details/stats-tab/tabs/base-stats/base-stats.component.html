@@ -1,0 +1,13 @@
+<table class="base-stats-table">
+  <tr *ngFor="let stat of stats">
+    <td class="label">{{ getStatLabel(stat) }}</td>
+    <td class="progress">
+      <mat-progress-bar
+        mode="determinate"
+        [value]="getProgress(stat)"
+        [ngClass]="getProgressClass(stat)"
+      >
+      </mat-progress-bar>
+    </td>
+  </tr>
+</table>

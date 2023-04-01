@@ -1,0 +1,46 @@
+:host {
+  .base-stats-table {
+    tr {
+      height: 26px;
+    }
+    tr :first-child {
+      font-weight: thin;
+      color: #b9b9b9;
+
+      min-width: 110px;
+    }
+
+    .progress {
+      width: 100%;
+    }
+  }
+  mat-progress-bar {
+    width: 100%;
+  }
+
+  /** Style to color mat-progress-bar when the progress is below 40%, between 40% and 80%, or above 80% */
+  .low {
+    ::ng-deep {
+      .mat-progress-bar-buffer,
+      .mat-progress-bar-fill::after {
+        background-color: #ff0000;
+      }
+    }
+  }
+  .medium {
+    ::ng-deep {
+      .mat-progress-bar-buffer,
+      .mat-progress-bar-fill::after {
+        background-color: #ff9900;
+      }
+    }
+  }
+  .high {
+    ::ng-deep {
+      .mat-progress-bar-buffer,
+      .mat-progress-bar-fill::after {
+        background-color: #00ff00;
+      }
+    }
+  }
+}
