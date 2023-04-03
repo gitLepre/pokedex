@@ -28,7 +28,6 @@ import { GetTypeIconPipe } from 'src/app/shared/pipes/get-type-icon.pipe';
 })
 export class MainInfoComponent {
   pokemon: Pokemon;
-  pokemonImageUrl: string;
   @ViewChild('pokemonImage') imgElement!: ElementRef;
   @ViewChild('bg') bg!: ElementRef;
 
@@ -38,16 +37,15 @@ export class MainInfoComponent {
     private poke: PokeApiService
   ) {
     this.pokemon = this.activatedRoute.snapshot.data['pokemon'];
-    this.pokemonImageUrl = this.poke.getPokemonImgUrlFromAssets(
-      this.pokemon.pokedex_number
-    );
-
-    console.log(this.pokemonImageUrl);
 
     console.log(
       'Checking Pokemon with National ID: ',
       this.pokemon.pokedex_number
     );
+  }
+
+  ngAfterViewInit(): void {
+    this.findPokemonMainColor(this.pokemon, this.imgElement);
   }
 
   backToList() {
@@ -56,8 +54,8 @@ export class MainInfoComponent {
 
   addToFavorites() {}
 
-  ngAfterViewInit(): void {
-    const img = this.imgElement.nativeElement;
+  findPokemonMainColor(pokemon: Pokemon, imgElement: ElementRef) {
+    const img = imgElement.nativeElement;
 
     img.onload = () => {
       const canvas = document.createElement('canvas');
@@ -120,6 +118,6 @@ export class MainInfoComponent {
       );
     };
 
-    img.src = this.pokemonImageUrl;
+    img.src = this.poke.getPokemonImgUrlFromAssets(this.pokemon.pokedex_number);
   }
 }

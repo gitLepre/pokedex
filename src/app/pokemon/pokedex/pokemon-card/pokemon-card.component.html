@@ -1,6 +1,18 @@
 <ng-container *ngIf="pokemon">
-  <div class="card" [routerLink]="['/pokemon', pokemon.pokedex_number]">
-    <h2>{{ pokemon.name }}</h2>
-    <img [src]="getPokemonImage()" [alt]="pokemon.name" />
+  <div
+    #pkmnCard
+    [class]="'card'"
+    [routerLink]="['/pokemon', pokemon.pokedex_number]"
+  >
+    <div class="img-wrapper">
+      <img
+        loading="lazy"
+        draggable="false"
+        [src]="getPokemonImage()"
+        [alt]="pokemon.name"
+      />
+    </div>
+    <h3>{{ pokemon.name }}</h3>
+    <p class="big fw-600">{{ pad(pokemon.pokedex_number) }}</p>
   </div>
 </ng-container>

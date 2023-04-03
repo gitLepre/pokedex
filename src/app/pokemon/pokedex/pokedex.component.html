@@ -1,5 +1,14 @@
-<pokedex-filters></pokedex-filters>
-
-<div *ngFor="let p of pokemons | slice : 0 : 4">
-  <pokemon-card [pokemon]="p"></pokemon-card>
+<div class="page-container">
+  <pokedex-filters></pokedex-filters>
+  <cdk-virtual-scroll-viewport
+    appendOnly
+    [itemSize]="265 / currentBreakpoint"
+    orientation="vertical"
+  >
+    <pokemon-card
+      *cdkVirtualFor="let pokemon of pokemons; templateCacheSize: 0"
+      [pokemon]="pokemon"
+    >
+    </pokemon-card>
+  </cdk-virtual-scroll-viewport>
 </div>

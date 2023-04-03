@@ -9,7 +9,20 @@ import { PkmnBaseStats } from '../models/pokemon-base-stats.model';
   providedIn: 'root',
 })
 export class PokeApiService {
-  pokemons = POKEDEX;
+  // Split between mega, galarian, alolan, and standard pokemons
+  megaPokemons = POKEDEX.filter((p) => p.name.includes('Mega '));
+  alolanPokemons = POKEDEX.filter((p) => p.name.includes('Alolan '));
+  galarianPokemons = POKEDEX.filter((p) => p.name.includes('Galarian '));
+
+  pokemons = POKEDEX.filter(
+    (pokemon) =>
+      !pokemon.name.includes('Mega ') &&
+      !pokemon.name.includes('Galarian ') &&
+      !pokemon.name.includes('Alolan ') &&
+      !pokemon.name.includes('Gmax ') &&
+      !pokemon.name.includes('Shadow ')
+  );
+
   types = POKEMON_TYPES;
   lastPokemonIndex = 898;
 

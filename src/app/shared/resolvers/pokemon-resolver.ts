@@ -20,24 +20,28 @@ export class PokemonResolver {
   ) {}
 
   // Check if id is valid, and if it is get the pokemon from the api and return it
-  resolve(
+  async resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Pokemon | undefined {
+  ): Promise<Pokemon | void> {
     const id = Number(route.paramMap.get('id'));
+
+    await new Promise((resolve) =>
+      setTimeout(resolve, 250 + Math.random() * 1000)
+    );
 
     if (!id || isNaN(id) || id < 1 || id > 898) {
       this.redirect();
-      return;
+      return Promise.resolve();
     }
 
     const pokemon = this.poke.getPokemon(id);
     if (!pokemon) {
       this.redirect();
-      return;
+      return Promise.resolve();
     }
 
-    return pokemon;
+    return Promise.resolve(pokemon);
   }
 
   redirect() {

@@ -1,5 +1,5 @@
 <div class="fr gap-1">
-  <mat-form-field appearance="outline" class="tag-form-field">
+  <mat-form-field appearance="outline" class="tag-form-field search">
     <input
       matInput
       autocomplete="off"
@@ -13,6 +13,7 @@
 
     <button
       mat-icon-button
+      matPrefix
       [disabled]="searchText.length === 0"
       (click)="searchText = ''; searchTextUpdate.next('')"
     >
@@ -34,12 +35,7 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <button
-    style="height: 41px"
-    mat-stroked-button
-    (click)="onOpenFiltersDialog()"
-  >
-    <span>Filters</span>
-    <mat-icon>filter_list</mat-icon>
+  <button class="filters-btn" mat-icon-button (click)="onOpenFiltersDialog()">
+    <mat-icon>tune</mat-icon>
   </button>
 </div>

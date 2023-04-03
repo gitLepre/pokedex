@@ -1,0 +1,28 @@
+:host {
+  border-radius: 16px;
+}
+.card {
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  height: 100%;
+  transform: scale(1);
+  transition: 0.15s all cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover {
+    transform: scale(0.97);
+  }
+  &:active {
+    transform: scale(0.94);
+  }
+  cursor: pointer;
+  .img-wrapper {
+    img {
+      // object-fit: contain;
+      width: 150px;
+      max-width: 100%;
+    }
+  }
+}
