@@ -1,12 +1,12 @@
 <div class="page-container">
-  <pokedex-filters></pokedex-filters>
+  <pokedex-filters (onFilterChanges)="updateFilters($event)"></pokedex-filters>
   <cdk-virtual-scroll-viewport
     appendOnly
     [itemSize]="265 / currentBreakpoint"
     orientation="vertical"
   >
     <pokemon-card
-      *cdkVirtualFor="let pokemon of pokemons; templateCacheSize: 0"
+      *cdkVirtualFor="let pokemon of currentPokemons; templateCacheSize: 0"
       [pokemon]="pokemon"
     >
     </pokemon-card>

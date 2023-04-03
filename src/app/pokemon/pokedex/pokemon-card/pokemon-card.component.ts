@@ -61,7 +61,7 @@ export class PokemonCardComponent {
     if (!type1) this.bgColor = `white`;
     if (!type2) this.bgColor = TYPE_COLORS[type1] + '66';
     else {
-      this.bgColor = TYPE_COLORS[type1] + '55'; // const type1Color = TYPE_COLORS[type1];
+      this.bgColor = TYPE_COLORS[type1] + '66'; // const type1Color = TYPE_COLORS[type1];
       // const type2Color = TYPE_COLORS[type2];
 
       // const r = Math.round(

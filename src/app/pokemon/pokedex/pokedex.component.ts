@@ -43,7 +43,7 @@ import { PokedexFiltersComponent } from './filters/pokedex-filters.component';
 })
 export class PokedexComponent {
   pokemons = this.poke.pokemons;
-  currentPokemons: Pokemon[] = [];
+  currentPokemons: Pokemon[] = this.poke.pokemons;
   pokemonNames = this.poke.pokemons.map((p) => p.name);
 
   resizeSubscription!: Subscription;
@@ -59,6 +59,8 @@ export class PokedexComponent {
   filteredOptions = [...this.pokemons];
 
   debouncing: boolean = false;
+
+  filters: any = {};
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -115,6 +117,50 @@ export class PokedexComponent {
         this.currentBreakpoint = this.findCurrentBreakpoint();
         this.cdRef.markForCheck();
       });
+  }
+
+  updateFilters($event: any) {
+    this.filters = { ...$event };
+    this.filterPokemons();
+  }
+
+  filterPokemons() {
+    const f = this.filters;
+
+    const filterName = (p: Pokemon) => {
+      return (
+        typeof f.name == 'undefined' ||
+        f.name == '' ||
+        p.name.toLowerCase().includes(f.name.toLowerCase())
+      );
+    };
+
+    const filterType = (p: Pokemon) => {
+      const type1 = (p?.type_1 || 'not_Set').toLowerCase();
+      const type2 = (p?.type_2 || 'not_Set').toLowerCase();
+
+      return (
+        typeof f.types == 'undefined' ||
+        f.types.length == 0 ||
+        f.types.includes(type1) ||
+        f.types.includes(type2)
+      );
+    };
+
+    const filterGeneration = (p: Pokemon) => {
+      console.log(p.generation, f.generations);
+      return (
+        typeof f.generations == 'undefined' ||
+        f.generations.length == 0 ||
+        f.generations.includes('' + p.generation)
+      );
+    };
+
+    const filterFn = (p: Pokemon) =>
+      filterName(p) && filterType(p) && filterGeneration(p);
+
+    this.currentPokemons = this.pokemons.filter(filterFn);
+    this.cdRef.markForCheck();
   }
 
   findCurrentBreakpoint() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { POKEDEX } from '../pokedata/pokedex';
 import { POKEMON_TYPES } from '../pokedata/types';
+import { POKEMON_GENERATIONS } from '../pokedata/generations';
 import { Pokemon } from '../models/pokemon.model';
 import { PkmnBaseStats } from '../models/pokemon-base-stats.model';
 
@@ -24,6 +25,7 @@ export class PokeApiService {
   );
 
   types = POKEMON_TYPES;
+  generations = POKEMON_GENERATIONS;
   lastPokemonIndex = 898;
 
   baseStatsMap = new Map<

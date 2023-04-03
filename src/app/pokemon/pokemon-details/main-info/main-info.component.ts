@@ -1,5 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { Pokemon } from '../../../shared/models/pokemon.model';
 import { GetPokemonTypesPipe } from '../../../shared/pipes/get-types.pipe';
@@ -9,6 +15,27 @@ import { PokeApiService } from '../../../shared/services/poke.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { GetTypeIconPipe } from 'src/app/shared/pipes/get-type-icon.pipe';
+
+const TYPE_COLORS: any = {
+  bug: '#92bc2c',
+  dark: '#595761',
+  dragon: '#0c69c8',
+  electric: '#f2d94e',
+  fairy: '#fba54c',
+  fighting: '#ee90e6',
+  fire: '#d3425f',
+  flying: '#a1bbec',
+  ghost: '#5f6dbc',
+  grass: '#5fbd58',
+  ground: '#da7c4d',
+  ice: '#75d0c1',
+  normal: '#a0a29f',
+  poison: '#b763cf',
+  psychic: '#fa8581',
+  rock: '#c9bb8a',
+  steel: '#5695a3',
+  water: '#539ddf',
+};
 
 @Component({
   standalone: true,
@@ -30,6 +57,7 @@ export class MainInfoComponent {
   pokemon: Pokemon;
   @ViewChild('pokemonImage') imgElement!: ElementRef;
   @ViewChild('bg') bg!: ElementRef;
+  @HostBinding('style.background-color') bgColor = 'white';
 
   constructor(
     private router: Router,
@@ -42,6 +70,8 @@ export class MainInfoComponent {
       'Checking Pokemon with National ID: ',
       this.pokemon.pokedex_number
     );
+
+    this.setBgColor();
   }
 
   ngAfterViewInit(): void {
@@ -53,6 +83,26 @@ export class MainInfoComponent {
   }
 
   addToFavorites() {}
+
+  setBgColor() {
+    // Blend the type_1 and type_2 color of the pokemon, combining the r g and b values and setting the opacity to 0.5
+
+    const type1 = (this.pokemon?.type_1 || '').toLowerCase();
+    const type2 = (this.pokemon?.type_2 || '')?.toLowerCase();
+
+    if (!type1) this.bgColor = `white`;
+    if (!type2) this.bgColor = TYPE_COLORS[type1] + '66';
+    else {
+      this.bgColor = TYPE_COLORS[type1] + '66';
+    }
+
+    // const pkmnDetailsHeaderColor = type1 !== 'normal' ? 'white' : 'black';
+    const pkmnDetailsHeaderColor = 'black';
+    document.documentElement.style.setProperty(
+      '--pokemon-details-header-color',
+      pkmnDetailsHeaderColor
+    );
+  }
 
   findPokemonMainColor(pokemon: Pokemon, imgElement: ElementRef) {
     const img = imgElement.nativeElement;
@@ -100,22 +150,22 @@ export class MainInfoComponent {
 
       const [rMax, gMax, bMax] = maxColor.replace(/[^\d,]/g, '').split(',');
       const threshold = 180;
-      let pkmnDetailsHeaderColor = 'white';
-      if (+rMax + +gMax + +bMax > threshold * 3) {
-        pkmnDetailsHeaderColor = 'black';
-      }
-      document.documentElement.style.setProperty(
-        '--pokemon-details-header-color',
-        pkmnDetailsHeaderColor
-      );
+      // let pkmnDetailsHeaderColor = 'white';
+      // if (+rMax + +gMax + +bMax > threshold * 3) {
+      //   pkmnDetailsHeaderColor = 'black';
+      // }
+      // document.documentElement.style.setProperty(
+      //   '--pokemon-details-header-color',
+      //   pkmnDetailsHeaderColor
+      // );
 
       const rgba = `rgba(${rMax}, ${gMax}, ${bMax}, 0.75)`;
 
-      document.body.style.backgroundColor = rgba;
-      document.documentElement.style.setProperty(
-        '--pokemon-details-background-color',
-        rgba
-      );
+      // document.body.style.backgroundColor = rgba;
+      // document.documentElement.style.setProperty(
+      //   '--pokemon-details-background-color',
+      //   rgba
+      // );
     };
 
     img.src = this.poke.getPokemonImgUrlFromAssets(this.pokemon.pokedex_number);

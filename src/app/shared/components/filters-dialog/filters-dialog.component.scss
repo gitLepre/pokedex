@@ -6,3 +6,10 @@
 .capitalize {
   text-transform: capitalize;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 16px;
+}

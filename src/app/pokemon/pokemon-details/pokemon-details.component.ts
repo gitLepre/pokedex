@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Pokemon } from '../../shared/models/pokemon.model';
-import { PokeApiService } from '../../shared/services/poke.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { AsyncPipe, NgFor, NgIf, SlicePipe } from '@angular/common';
 import { ZeroPadPipe } from 'src/app/shared/pipes/zero-pad.pipe';
@@ -33,4 +25,6 @@ const _COMMONS = [NgFor, NgIf, AsyncPipe];
     MainInfoComponent,
   ],
 })
-export class PokemonDetailsComponent {}
+export class PokemonDetailsComponent {
+  constructor() {}
+}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +43,8 @@ export class PokedexFiltersComponent {
   searchTextUpdate: Subject<string> = new Subject<string>();
 
   filters: any = {};
+  @Output('onFilterChanges') newFilters: EventEmitter<any> =
+    new EventEmitter<any>(true);
 
   filteredOptions$ = new BehaviorSubject<string[]>([
     ...POKEDEX.map((p) => p.name),
@@ -75,10 +77,10 @@ export class PokedexFiltersComponent {
 
   filterChange(f: any) {
     Object.keys(f).forEach((key) => {
-      if (f[key]) this.filters[key] = JSON.stringify(f[key]);
+      if (!!f[key]) this.filters[key] = f[key];
       else delete this.filters[key];
     });
-    console.log(this.filters);
+    this.newFilters.emit(this.filters);
   }
 
   onSelectPokemon(evt?: any) {
@@ -102,7 +104,9 @@ export class PokedexFiltersComponent {
 
   onOpenFiltersDialog() {
     const dialogRef = this.dialog.open(FiltersDialogComponent, {
-      data: this.filters,
+      data: { ...this.filters },
+      width: '80%',
+      maxWidth: '800px',
     });
 
     (dialogRef as any).afterClosed().subscribe((result: any) => {
