@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="classification">
+  <mat-chip-listbox>
+    <mat-chip>
+      <span *ngSwitchCase="PCs.Normal">Normal</span>
+      <span *ngSwitchCase="PCs.SubLegendary">Sub-Legendary</span>
+      <span *ngSwitchCase="PCs.Mythical">Mythical</span>
+      <span *ngSwitchCase="PCs.Legendary">Legendary</span>
+      <span *ngSwitchDefault></span>
+    </mat-chip>
+  </mat-chip-listbox>
+</ng-container>

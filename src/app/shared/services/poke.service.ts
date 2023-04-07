@@ -33,8 +33,16 @@ export class PokeApiService {
     { label: string; avg: number; max: number }
   >();
 
+  pokemonStatuses = new Set<string>();
+
   constructor() {
-    this.computePokemonStats();
+    this.pokemons.forEach((pokemon) => {
+      const status = pokemon.status;
+      if (status) {
+        this.pokemonStatuses.add(status);
+      }
+    });
+    console.log(this.pokemonStatuses);
   }
 
   getPokemon(id: number): Pokemon | undefined {

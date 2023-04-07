@@ -15,6 +15,7 @@ import { PokeApiService } from '../../../shared/services/poke.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { GetTypeIconPipe } from 'src/app/shared/pipes/get-type-icon.pipe';
+import { StatusChipComponent } from '../status-chip/status-chip.component';
 
 const TYPE_COLORS: any = {
   bug: '#92bc2c',
@@ -51,6 +52,7 @@ const TYPE_COLORS: any = {
     GetTypeIconPipe,
     MatButtonModule,
     MatIconModule,
+    StatusChipComponent,
   ],
 })
 export class MainInfoComponent {

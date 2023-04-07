@@ -18,7 +18,11 @@
     </button>
   </header>
   <div class="sub-header">
-    <h1>{{ pokemon.name }}</h1>
+    <div class="fr align-center gap-1">
+      <h1>{{ pokemon.name }}</h1>
+      <status-chip [classification]="pokemon.status"></status-chip>
+    </div>
+
     <p class="small light">
       {{ pokemon.japanese_name }}
     </p>
