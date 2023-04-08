@@ -4,7 +4,7 @@
 
   .card {
     border-radius: 16px;
-    padding: 30px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -21,8 +21,8 @@
     }
     cursor: pointer;
     .img-wrapper {
-      width: 150px;
-      height: 150px;
+      max-width: 150px;
+      max-height: 150px;
       margin: auto;
       position: relative;
 
