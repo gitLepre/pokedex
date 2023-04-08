@@ -1,51 +1,67 @@
 <ng-container *ngIf="pokemon as p">
-  <table class="about-table">
-    <tr>
-      <td>Species</td>
-      <td>{{ p.species }}</td>
-    </tr>
-    <tr>
-      <td>Height</td>
-      <td>{{ p | getHeight }} ({{ p | toLbs }})</td>
-    </tr>
-    <tr>
-      <td>Weight</td>
-      <td>{{ p | getWeight }} ({{ p | toFeet }})</td>
-    </tr>
-    <tr>
-      <td>Abilities</td>
-      <td>
-        {{ p | getAbilities }}
-      </td>
-    </tr>
-    <tr>
-      <td>Generation</td>
-      <td>
-        {{ p?.generation || "N/A" }}
-      </td>
-    </tr>
-  </table>
-  <h3 class="mt-2 mb-1">Breeding</h3>
-  <table class="about-table">
-    <tr>
-      <td>Gender</td>
-      <td>{{ p.species }}</td>
-    </tr>
-    <tr>
-      <td>Egg Groups</td>
-      <td>{{ p | getEggGroups }}</td>
-    </tr>
-    <tr>
-      <td class="help-wrap">
-        Egg Cycles
-        <mat-icon
-          class="help"
-          matTooltipClass="help-tooltip"
-          matTooltipShowDelay="200"
-          matTooltipHideDelay="150"
-          #tooltip="matTooltip"
-          (click)="tooltip.toggle()"
-          matTooltip="An Egg cycle (Japanese: タマゴのサイクル Egg
+  <ng-container *ngIf="!loading; else load">
+    <h3 class="mt-2 mb-1">Description</h3>
+    <p>{{ description || "" }}</p>
+    <h3 class="mt-2 mb-1">Informations</h3>
+    <table class="about-table">
+      <tr>
+        <td>Species</td>
+        <td>{{ p.species }}</td>
+      </tr>
+      <tr>
+        <td>Height</td>
+        <td>{{ p | getHeight }} ({{ p | toLbs }})</td>
+      </tr>
+      <tr>
+        <td>Weight</td>
+        <td>{{ p | getWeight }} ({{ p | toFeet }})</td>
+      </tr>
+      <tr>
+        <td>Abilities</td>
+        <td>
+          {{ p | getAbilities }}
+        </td>
+      </tr>
+      <tr>
+        <td>Generation</td>
+        <td>
+          {{ p | getGeneration }}
+        </td>
+      </tr>
+    </table>
+    <h3 class="mt-2 mb-1">Breeding</h3>
+    <table class="about-table">
+      <tr>
+        <td>Gender</td>
+        <td class="genders" *ngIf="p.status === 'Normal'; else genderFluid">
+          <div class="fr">
+            <mat-icon class="male">male</mat-icon>
+            <span class="flex-1"> {{ p?.percentage_male || 0 }}% </span>
+          </div>
+          <div class="fr">
+            <mat-icon class="female">female</mat-icon>
+            <span class="flex-1"> {{ 100 - (p?.percentage_male || 0) }}%</span>
+          </div>
+        </td>
+        <ng-template #genderFluid>
+          <td>Fluid</td>
+        </ng-template>
+      </tr>
+      <tr>
+        <td>Egg Groups</td>
+        <td>{{ p | getEggGroups }}</td>
+      </tr>
+      <tr>
+        <td class="help-wrap">
+          Egg Cycles
+          <mat-icon
+            class="help"
+            matTooltipClass="help-tooltip"
+            matTooltipShowDelay="200"
+            matTooltipHideDelay="150"
+            #tooltip="matTooltip"
+            (click)="tooltip.toggle()"
+            matTooltip="An Egg cycle (Japanese: タマゴのサイクル Egg
           cycle) is an internal value used for tracking how long until a Pokémon
           Egg hatches in the core series Pokémon games. An Egg's Egg cycle
           counter is initially set to a specific value that depends on the
@@ -55,10 +71,17 @@
           cycle, their Egg's remaining Egg cycles normally decrease by 1. Once
           an Egg has no Egg cycles remaining, it hatches. The specifics of how
           this is implemented differs between generations. "
-          >help</mat-icon
-        >
-      </td>
-      <td>{{ p.egg_cycles }}</td>
-    </tr>
-  </table>
+            >help</mat-icon
+          >
+        </td>
+        <td>{{ p.egg_cycles }}</td>
+      </tr>
+    </table>
+  </ng-container>
 </ng-container>
+
+<ng-template #load>
+  <div class="spinner-wrapper">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

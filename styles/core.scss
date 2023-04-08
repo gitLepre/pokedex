@@ -224,3 +224,11 @@ section {
 .flex-1 {
   flex: 1;
 }
+
+.spinner-wrapper {
+  min-height: 240px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

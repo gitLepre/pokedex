@@ -4,6 +4,7 @@ import {
   PreloadAllModules,
   provideRouter,
   withPreloading,
+  withRouterConfig,
 } from '@angular/router';
 import { AppComponent } from './app/app.component';
 
@@ -14,6 +15,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserAnimationsModule, MatSnackBarModule),
-    provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
+    provideRouter(
+      APP_ROUTES,
+      withRouterConfig({ onSameUrlNavigation: 'reload' }),
+      withPreloading(PreloadAllModules)
+    ),
   ],
 }).catch((err) => console.error(err));

@@ -1,10 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, inject } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { POKEDEX } from '../pokedata/pokedex';
 import { POKEMON_TYPES } from '../pokedata/types';
 import { POKEMON_GENERATIONS } from '../pokedata/generations';
 import { Pokemon } from '../models/pokemon.model';
 import { PkmnBaseStats } from '../models/pokemon-base-stats.model';
+import Pokedex, { PokemonSpecies } from 'pokedex-promise-v2';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+
+const pokeAPIOptions = {
+  // protocol: 'https',
+  // hostName: 'localhost:443',
+  // versionPath: '/api/v2/',
+  // cacheLimit: 100 * 1000, // 100s
+  // timeout: 5 * 1000 // 5s
+};
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +24,8 @@ export class PokeApiService {
   megaPokemons = POKEDEX.filter((p) => p.name.includes('Mega '));
   alolanPokemons = POKEDEX.filter((p) => p.name.includes('Alolan '));
   galarianPokemons = POKEDEX.filter((p) => p.name.includes('Galarian '));
+
+  pokeApiV2 = new Pokedex(pokeAPIOptions);
 
   pokemons = POKEDEX.filter(
     (pokemon) =>
@@ -33,16 +45,33 @@ export class PokeApiService {
     { label: string; avg: number; max: number }
   >();
 
-  pokemonStatuses = new Set<string>();
+  pokemonStatuses = new Set<string>([
+    'Normal',
+    'Sub Legendary',
+    'Legendary',
+    'Mythical',
+  ]);
 
   constructor() {
-    this.pokemons.forEach((pokemon) => {
-      const status = pokemon.status;
-      if (status) {
-        this.pokemonStatuses.add(status);
-      }
-    });
-    console.log(this.pokemonStatuses);
+    this.computePokemonStats();
+  }
+
+  getPokemonidByName(name: string) {
+    return (
+      this.pokemons.find(
+        (pokemon) =>
+          (pokemon.name || '').toLocaleLowerCase() ===
+          (name || '').toLowerCase()
+      )?.pokedex_number || 0
+    );
+  }
+
+  getPokemonSpecies(pokemon: Pokemon): Promise<PokemonSpecies> {
+    return this.pokeApiV2.getPokemonSpeciesByName(pokemon.pokedex_number);
+  }
+
+  getEvolutionChain(id: number) {
+    return this.pokeApiV2.getEvolutionChainById(id);
   }
 
   getPokemon(id: number): Pokemon | undefined {
@@ -54,6 +83,9 @@ export class PokeApiService {
 
   getPokemonImgUrlFromAssets(pokemonIndex: string | number) {
     return `assets/images/pokemons/${this.pad('' + pokemonIndex)}.png`;
+    // return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${this.pad(
+    //   '' + pokemonIndex
+    // )}.png`;
   }
 
   getPokemonImgUrl(pokemonIndex: string | number) {

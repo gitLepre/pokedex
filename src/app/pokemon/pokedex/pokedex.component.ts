@@ -69,7 +69,6 @@ export class PokedexComponent {
   ) {
     this.subscribeToSearchChanges();
     this.subscribeToWindowResize();
-    console.log(this.currentBreakpoint);
   }
 
   ngOnDestroy() {
@@ -78,7 +77,7 @@ export class PokedexComponent {
   }
 
   getPokemonImage(pokemon: string | number) {
-    return this.poke.getPokemonImgUrlFromAssets(pokemon);
+    return this.poke.getPokemonImgUrl(pokemon);
   }
 
   subscribeToSearchChanges() {
@@ -148,7 +147,6 @@ export class PokedexComponent {
     };
 
     const filterGeneration = (p: Pokemon) => {
-      console.log(p.generation, f.generations);
       return (
         typeof f.generations == 'undefined' ||
         f.generations.length == 0 ||

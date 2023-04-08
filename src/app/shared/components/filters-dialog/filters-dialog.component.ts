@@ -45,7 +45,6 @@ export class FiltersDialogComponent implements OnInit {
     private poke: PokeApiService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(this.data);
     this.form = this.fb.group({
       generations: [this.data?.generations || ''],
       types: [this.data?.types || ''],

@@ -1,0 +1,40 @@
+<div class="disclaimer align-center">
+  <mat-icon> info </mat-icon>
+  <div class="fc">
+    <h3>Disclaimer</h3>
+    <p class="disclaimer__text">
+      The information related to evolutions is not complete. Refer to
+      <a target="_blank" href="https://pokeapi.co/docs/v2"
+        >pokeAPI v2 documentation</a
+      >
+      for details.
+    </p>
+  </div>
+</div>
+
+<div class="evolutions">
+  <a
+    class="item"
+    *ngFor="let evolution of evolutions; let i = index"
+    [href]="
+      (pokemon.name || '') === (evolution?.name || '')
+        ? '#'
+        : '/pokemon/' + evolution.id
+    "
+  >
+    <div class="img-wrapper">
+      <img
+        loading="lazy"
+        [src]="evolution.image"
+        [alt]="evolution.name"
+        [title]="evolution.name"
+      />
+    </div>
+    <h4>
+      {{ evolution.name }}
+    </h4>
+    <mat-icon *ngIf="i < evolutions.length - 1" class="next-icon">
+      arrow_forward_ios
+    </mat-icon>
+  </a>
+</div>
