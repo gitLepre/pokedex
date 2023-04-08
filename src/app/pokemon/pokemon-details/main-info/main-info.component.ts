@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { GetTypeIconPipe } from 'src/app/shared/pipes/get-type-icon.pipe';
 import { StatusChipComponent } from '../status-chip/status-chip.component';
+import { TypesIconComponent } from 'src/app/shared/components/types-icon/types-icon.component';
 
 const TYPE_COLORS: any = {
   bug: '#92bc2c',
@@ -53,6 +54,7 @@ const TYPE_COLORS: any = {
     MatButtonModule,
     MatIconModule,
     StatusChipComponent,
+    TypesIconComponent,
   ],
 })
 export class MainInfoComponent {

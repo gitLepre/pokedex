@@ -31,7 +31,8 @@
     <ng-container *ngIf="pokemon | getTypes as types">
       <mat-chip-listbox>
         <mat-chip *ngFor="let type of types">
-          <img width="14" [src]="type | getTypeIcon" />
+          <!-- <img width="14" [src]="type | getTypeIcon" /> -->
+          <types-icon [type]="type"></types-icon>
           {{ type }}
         </mat-chip>
       </mat-chip-listbox>
