@@ -18,6 +18,7 @@ import { FiltersDialogComponent } from 'src/app/shared/components/filters-dialog
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { POKEDEX } from '../../../shared/pokedata/pokedex';
+import { pokemonsFilter } from 'src/app/shared/services/util';
 
 const _MATERIAL = [
   MatFormFieldModule,
@@ -61,11 +62,7 @@ export class PokedexFiltersComponent {
       .subscribe({
         next: (f: string) => {
           this.filterChange({ name: f });
-          this.filteredOptions$.next(
-            POKEDEX.filter(
-              (p) => p?.name && p.name.toLowerCase().includes(f.toLowerCase())
-            ).map((p) => p.name)
-          );
+
           this.debouncing = false;
         },
       });
@@ -81,6 +78,10 @@ export class PokedexFiltersComponent {
       else delete this.filters[key];
     });
     this.newFilters.emit(this.filters);
+
+    this.filteredOptions$.next(
+      [...pokemonsFilter(this.filters)].map((p) => p.name)
+    );
   }
 
   onSelectPokemon(evt?: any) {
