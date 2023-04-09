@@ -1,9 +1,16 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { Pokemon } from 'src/app/shared/models/pokemon.model';
 import { PokeApiService } from 'src/app/shared/services/poke.service';
 import { RouterLink } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const TYPE_COLORS: any = {
   bug: '#92bc2c',
@@ -31,14 +38,25 @@ const TYPE_COLORS: any = {
   selector: 'pokemon-card[pokemon]',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.scss'],
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatProgressSpinnerModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PokemonCardComponent {
   @Input() pokemon!: Pokemon;
-  constructor(private poke: PokeApiService) {}
+
+  imgLoading = true;
+
+  constructor(private poke: PokeApiService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.setBgColor();
+  }
+
+  onImageLoad() {
+    setTimeout(() => {
+      this.imgLoading = false;
+      this.cdRef.markForCheck();
+    }, Math.random() * 1400);
   }
 
   @HostBinding('style.background-color') bgColor = 'white';

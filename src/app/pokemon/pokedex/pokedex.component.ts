@@ -130,7 +130,8 @@ export class PokedexComponent {
       return (
         typeof f.name == 'undefined' ||
         f.name == '' ||
-        p.name.toLowerCase().includes(f.name.toLowerCase())
+        p.name.toLowerCase().includes(f.name.toLowerCase()) ||
+        ('0' + this.poke.pad('' + p.pokedex_number)).includes(f.name)
       );
     };
 

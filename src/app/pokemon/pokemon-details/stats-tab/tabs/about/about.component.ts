@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { GetPokemonHeightPipe } from 'src/app/shared/pipes/get-height.pipe';
 import { GetPokemonWeightPipe } from 'src/app/shared/pipes/get-weigth.pipe';
@@ -15,12 +15,14 @@ import { GetGenerationPipe } from 'src/app/shared/pipes/get-generation.pipe';
 import { PokemonSpecies } from 'pokedex-promise-v2';
 import { ReplaySubject, skip } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   standalone: true,
   selector: 'about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgIf,
     NgFor,
@@ -43,7 +45,11 @@ export class AboutComponent {
   description!: string;
   loading = true;
 
-  constructor(private router: ActivatedRoute, private poke: PokeApiService) {
+  constructor(
+    private router: ActivatedRoute,
+    private poke: PokeApiService,
+    private cdRef: ChangeDetectorRef
+  ) {
     this.pokemon = this.router.snapshot.data['pokemon'];
   }
 
@@ -57,7 +63,11 @@ export class AboutComponent {
         this.description = this.description.replace(//g, ' ');
 
         this.loading = false;
+        this.cdRef.markForCheck();
       });
-    else this.loading = false;
+    else {
+      this.loading = false;
+      this.cdRef.markForCheck();
+    }
   }
 }

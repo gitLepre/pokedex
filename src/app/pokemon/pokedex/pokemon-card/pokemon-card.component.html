@@ -5,12 +5,17 @@
     [routerLink]="['/pokemon', pokemon.pokedex_number]"
   >
     <div class="img-wrapper">
-      <div class="fake-loader"></div>
+      <div class="fake-loader" [ngClass]="{ hidden: !imgLoading }">
+        <mat-spinner diameter="20"></mat-spinner>
+      </div>
       <img
         loading="lazy"
         draggable="false"
         [src]="getPokemonImage()"
         [alt]="pokemon.name"
+        (load)="onImageLoad()"
+        [ngClass]="{ show: !imgLoading }"
+        #img
       />
     </div>
     <h3>{{ pokemon.name }}</h3>
