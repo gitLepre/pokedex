@@ -21,11 +21,16 @@
     }
     .mat-mdc-tab-label-container {
       padding: 0 16px 20px 16px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     .mat-mdc-tab-group {
       height: 100%;
       flex: 1;
+      max-width: 600px;
+      width: 100%;
+      margin: auto;
     }
 
     .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
@@ -35,15 +40,19 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     .mat-mdc-tab-body-wrapper {
       height: 100%;
       flex: 1;
       // overflow: hidden;
-
+      overflow-x: hidden;
       mat-tab-body > * {
         padding: 0 32px 24px 32px;
+        max-width: 1100px;
+        margin: auto;
       }
     }
   }
