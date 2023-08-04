@@ -1,27 +1,9 @@
-# Federicolorrai
+# Pokedex APP
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+You can see a preview of the website at [this link](https://pokedex-3b2fc.web.app/). This is a simple pokedex created using [https://pokeapi.co/docs/v2](PokeAPI V2) to read and display PokèMon data.
 
-## Development server
+## About the website
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The website is made using Angular v13 - now refactored to v15 to implement standalone components. It is a very simple yet (hopefully) effective showcases of my abilities in API integration, SCSS, TypeScript, HTML5, UI and UX design and attention to responsiveness (it's mobile-friendly).
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+You can Search and Filter Pokemons and see their combact stats, evolution lines and extra informations fetched using the PokeAPI V2 APIs.
