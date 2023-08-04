@@ -2,14 +2,26 @@
   ::ng-deep .mat-mdc-select-value-text {
     text-transform: capitalize;
   }
-}
-.capitalize {
-  text-transform: capitalize;
-}
+  .capitalize {
+    text-transform: capitalize;
+  }
 
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  gap: 16px;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: 16px;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .close {
+    --size: 16px;
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
+    font-size: var(--size);
+  }
 }

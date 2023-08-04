@@ -16,6 +16,7 @@ import { AsyncPipe, NgFor } from '@angular/common';
 import { PokeApiService } from '../../services/poke.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
@@ -31,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
     AsyncPipe,
     MatSelectModule,
     MatButtonModule,
+    MatIconModule,
   ],
 })
 export class FiltersDialogComponent implements OnInit {
@@ -59,5 +61,13 @@ export class FiltersDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  clear() {
+    this.form.patchValue({
+      generations: '',
+      types: '',
+    });
+    this.dialogRef.close(this.form.value);
   }
 }
