@@ -1,51 +1,53 @@
 <ng-container *ngIf="pokemon; else loader">
-  <header>
-    <button
-      class="left"
-      mat-icon-button
-      (click)="backToList()"
-      aria-label="Back"
-    >
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <!-- <button
-      class="right"
-      mat-icon-button
-      (click)="addToFavorites()"
-      aria-label="Add to favorites"
-    >
-      <mat-icon>favorite_border</mat-icon>
-    </button> -->
-  </header>
-  <div class="sub-header">
-    <div class="fr align-center gap-1">
-      <h1>{{ pokemon.name }}</h1>
-      <status-chip [classification]="pokemon.status"></status-chip>
+  <div class="wrapper">
+    <header>
+      <button
+        class="left"
+        mat-icon-button
+        (click)="backToList()"
+        aria-label="Back"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <!-- <button
+        class="right"
+        mat-icon-button
+        (click)="addToFavorites()"
+        aria-label="Add to favorites"
+      >
+        <mat-icon>favorite_border</mat-icon>
+      </button> -->
+    </header>
+    <div class="sub-header">
+      <div class="fr align-center gap-1">
+        <h1>{{ pokemon.name }}</h1>
+        <status-chip [classification]="pokemon.status"></status-chip>
+      </div>
+
+      <p class="small light">
+        {{ pokemon.japanese_name }}
+      </p>
+      <p class="big light end"># {{ pokemon.pokedex_number | zeroPad }}</p>
+
+      <ng-container *ngIf="pokemon | getTypes as types">
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let type of types">
+            <!-- <img width="14" [src]="type | getTypeIcon" /> -->
+            <types-icon [type]="type"></types-icon>
+            {{ type }}
+          </mat-chip>
+        </mat-chip-listbox>
+        <!-- <mat-chip-listbox>
+          <mat-chip *ngFor="let type of types">
+            <img width="16" [src]="type | getTypeIcon" />
+            <span matChipTrailingIcon>{{ type }}</span>
+          </mat-chip>
+        </mat-chip-listbox> -->
+      </ng-container>
     </div>
 
-    <p class="small light">
-      {{ pokemon.japanese_name }}
-    </p>
-    <p class="big light end"># {{ pokemon.pokedex_number | zeroPad }}</p>
-
-    <ng-container *ngIf="pokemon | getTypes as types">
-      <mat-chip-listbox>
-        <mat-chip *ngFor="let type of types">
-          <!-- <img width="14" [src]="type | getTypeIcon" /> -->
-          <types-icon [type]="type"></types-icon>
-          {{ type }}
-        </mat-chip>
-      </mat-chip-listbox>
-      <!-- <mat-chip-listbox>
-        <mat-chip *ngFor="let type of types">
-          <img width="16" [src]="type | getTypeIcon" />
-          <span matChipTrailingIcon>{{ type }}</span>
-        </mat-chip>
-      </mat-chip-listbox> -->
-    </ng-container>
+    <img #pokemonImage class="pokemon-img fade-in" draggable="false" />
   </div>
-
-  <img #pokemonImage class="pokemon-img fade-in" draggable="false" />
 </ng-container>
 
 <ng-template #loader></ng-template>
