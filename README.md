@@ -4,6 +4,6 @@ You can see a preview of the website at [this link](https://pokedex-3b2fc.web.ap
 
 ## About the website
 
-The website is made using Angular v13 - now refactored to v15 to implement standalone components. It is a very simple yet (hopefully) effective showcases of my abilities in API integration, SCSS, TypeScript, HTML5, UI and UX design and attention to responsiveness (it's mobile-friendly).
+The website is made using Angular v13 - now refactored to v15 to implement standalone components. It is a very simple yet (hopefully) effective showcase of my abilities in API integration, SCSS, TypeScript, HTML5, UI and UX design and attention to responsiveness (check out mobile sizes too!).
 
-You can Search and Filter Pokemons and see their combact stats, evolution lines and extra informations fetched using the PokeAPI V2 APIs.
+The actual list of Pokemon is parsed from the Pokedex.ts file available in the shared folder, while the specific informations related to a pokemon are parsed from the PokeAPI V2 APIs. You can Search and Filter Pokemons and see their combact stats, evolution lines and extra informations.
